@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BannerConvocatoria from '../components/BannerConvocatoria.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import Sidebar from '../components/Sidebar.astro';
+import ArticleModal from '../components/ArticleModal.astro';
+import initialArticles from '../data/articulos.json';
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const categorias = ['Todos', 'Ensayos', 'Reseñas', 'Artículos', 'Escrituras anfibias'];
+---
+
+<Layout 
+  title="Revista Literaria Anfibias | Lectura y escritura desde la diversidad" 
+  description="Revista chilena que posee un espacio de lectura y escritura desde la diversidad: voces femeninas, feministas, queer y críticas."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- Hero Editorial Elegante Serif -->
+    <section class="border-b border-pistachio-300 pb-12 mb-10 text-center sm:text-left">
+      <div class="max-w-4xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-forest-800 text-white rounded text-xs font-sans font-semibold mb-4 tracking-wider uppercase shadow-2xs">
+          <span>🦎 Revista Chilena</span>
+          <span>·</span>
+          <span>Volumen 1, N° 1</span>
+        </div>
+
+        <h1 class="font-serif text-4xl sm:text-6xl font-extrabold tracking-tight text-forest-900 leading-[1.1] mb-6">
+          Lectura y escritura desde la diversidad: voces femeninas, feministas y queer.
+        </h1>
+
+        <p class="font-sans text-lg sm:text-xl text-ink-800 leading-relaxed max-w-3xl mb-6 font-light">
+          Un espacio de encuentro para la literatura, el pensamiento crítico y la experimentación narrativa.
+        </p>
+
+        <div class="flex flex-wrap gap-3 justify-center sm:justify-start text-xs font-sans font-medium text-forest-900">
+          <span class="flex items-center gap-1.5 bg-white border border-pistachio-300 px-3 py-1.5 rounded shadow-2xs">
+            <span class="text-forest-700">✓</span> Ensayos Críticos (hasta 2.000 palabras)
+          </span>
+          <span class="flex items-center gap-1.5 bg-white border border-pistachio-300 px-3 py-1.5 rounded shadow-2xs">
+            <span class="text-forest-700">✓</span> Reseñas de Libros (1.000–1.500 palabras)
+          </span>
+          <span class="flex items-center gap-1.5 bg-white border border-pistachio-300 px-3 py-1.5 rounded shadow-2xs">
+            <span class="text-forest-700">✓</span> Artículos & Relatos (hasta 3.000 palabras)
+          </span>
+          <span class="flex items-center gap-1.5 bg-white border border-pistachio-300 px-3 py-1.5 rounded shadow-2xs">
+            <span class="text-forest-700">✓</span> Escrituras Anfibias Híbridas
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Convocatoria Abierta Banner -->
+    <BannerConvocatoria />
+
+    <!-- Sección Principal: Contenido y Sidebar -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-12">
+      
+      <!-- Columna Principal de Artículos (8 columnas) -->
+      <section class="lg:col-span-8 space-y-8">
+        
+        <!-- Cabecera de la Sección y Filtros -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-pistachio-300 pb-4">
+          <div>
+            <h2 class="font-serif text-2xl font-bold text-forest-900">
+              Textos & Publicaciones Recientes
+            </h2>
+            <p class="text-xs text-ink-600 font-sans mt-0.5">
+              Filtra por nuestras secciones de ensayos, reseñas, artículos y escrituras anfibias.
+            </p>
+          </div>
+
+          <!-- Filtro de Categorías -->
+          <div class="flex flex-wrap gap-1.5" id="category-filters">
+            {categorias.map((cat, idx) => (
+              <button
+                type="button"
+                data-category={cat}
+                class={`category-filter-btn px-3 py-1 rounded text-xs font-medium font-sans transition-colors ${
+                  idx === 0
+                    ? 'bg-forest-800 text-white shadow-2xs font-semibold'
+                    : 'bg-pistachio-100 text-forest-900 hover:bg-pistachio-200 border border-pistachio-200'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Contenedor dinámico de la Grilla de Artículos -->
+        <div 
+          id="articles-grid" 
+          class="grid grid-cols-1 sm:grid-cols-2 gap-6"
+          data-initial-articles={JSON.stringify(initialArticles)}
+        >
+          {initialArticles.map((articulo) => (
+            <div class="article-item-wrapper" data-category={articulo.categoria}>
+              <ArticleCard articulo={articulo} />
+            </div>
+          ))}
+        </div>
+
+        <!-- Aviso para artículos vacíos tras filtrado -->
+        <div id="no-articles-msg" class="hidden text-center py-12 bg-white border border-pistachio-300 rounded-xl">
+          <p class="font-serif text-lg text-ink-600 italic">No hay textos publicados en esta categoría por el momento.</p>
+          <a href={`${baseUrl}convocatorias`} class="mt-2 inline-block text-xs uppercase tracking-wider font-semibold text-forest-800 underline">
+            Envía tu manuscrito →
+          </a>
+        </div>
+
+      </section>
+
+      <!-- Barra Lateral Informativa (4 columnas) -->
+      <div class="lg:col-span-4">
+        <Sidebar />
+      </div>
+
+    </div>
+
+  </div>
+
+  <ArticleModal />
+</Layout>
+
+<script>
+  import { getArticles } from '../utils/articlesManager.js';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('articles-grid');
+    const noArticlesMsg = document.getElementById('no-articles-msg');
+    const filterBtns = document.querySelectorAll('.category-filter-btn');
+
+    function renderArticles(selectedCategory = 'Todos') {
+      if (!grid) return;
+
+      const articles = getArticles();
+      grid.innerHTML = '';
+
+      const filtered = selectedCategory === 'Todos' 
+        ? articles 
+        : articles.filter(a => a.categoria === selectedCategory);
+
+      if (filtered.length === 0) {
+        if (noArticlesMsg) noArticlesMsg.classList.remove('hidden');
+      } else {
+        if (noArticlesMsg) noArticlesMsg.classList.add('hidden');
+
+        filtered.forEach(articulo => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'article-item-wrapper fade-in';
+          wrapper.setAttribute('data-category', articulo.categoria);
+
+          wrapper.innerHTML = `
+            <article class="bg-white border border-pistachio-300 rounded-xl p-6 hover:border-forest-700 hover:shadow-md transition-all duration-300 flex flex-col justify-between h-full group">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-3 text-xs text-ink-600 font-sans">
+                  <span class="inline-block bg-pistachio-100 text-forest-900 font-semibold uppercase tracking-wider px-2.5 py-1 rounded text-[11px] border border-pistachio-200">
+                    ${articulo.categoria}
+                  </span>
+                  <div class="flex items-center gap-2">
+                    <time>${articulo.fecha}</time>
+                    <span>·</span>
+                    <span>${articulo.lecturaMinutos || 5} min</span>
+                  </div>
+                </div>
+
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-forest-900 group-hover:text-forest-700 transition-colors leading-snug mb-2">
+                  <button 
+                    type="button" 
+                    class="open-article-btn text-left hover:underline focus:outline-none"
+                    data-article='${JSON.stringify(articulo).replace(/'/g, "&apos;")}'
+                  >
+                    ${articulo.titulo}
+                  </button>
+                </h3>
+
+                ${articulo.subtitulo ? `<p class="font-serif italic text-sm text-forest-800 mb-3 leading-relaxed">${articulo.subtitulo}</p>` : ''}
+
+                <div class="text-xs font-sans text-forest-900 font-semibold mb-4 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-forest-700"></span>
+                  <span>Por ${articulo.autor}</span>
+                </div>
+
+                <p class="text-ink-800 text-sm leading-relaxed mb-6 font-sans line-clamp-3">
+                  ${articulo.resumen}
+                </p>
+              </div>
+
+              <div class="pt-4 border-t border-pistachio-200 flex items-center justify-between gap-3 text-xs font-sans mt-auto">
+                <button
+                  type="button"
+                  class="open-article-btn font-semibold text-forest-900 hover:text-forest-700 inline-flex items-center gap-1"
+                  data-article='${JSON.stringify(articulo).replace(/'/g, "&apos;")}'
+                >
+                  <span>Leer texto completo</span>
+                  <svg class="w-3.5 h-3.5 text-forest-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+
+                <button
+                  type="button"
+                  class="download-pdf-btn text-forest-900 font-semibold hover:bg-pistachio-100 inline-flex items-center gap-1 bg-pistachio-50 px-2.5 py-1.5 rounded border border-pistachio-300"
+                  data-title="${articulo.titulo}"
+                  data-autor="${articulo.autor}"
+                >
+                  <svg class="w-3.5 h-3.5 text-forest-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                  <span>PDF</span>
+                </button>
+              </div>
+            </article>
+          `;
+          grid.appendChild(wrapper);
+        });
+      }
+    }
+
+    renderArticles('Todos');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-forest-800', 'text-white', 'font-semibold', 'shadow-2xs');
+          b.classList.add('bg-pistachio-100', 'text-forest-900');
+        });
+        btn.classList.remove('bg-pistachio-100', 'text-forest-900');
+        btn.classList.add('bg-forest-800', 'text-white', 'font-semibold', 'shadow-2xs');
+
+        const cat = btn.getAttribute('data-category') || 'Todos';
+        renderArticles(cat);
+      });
+    });
+  });
+</script>

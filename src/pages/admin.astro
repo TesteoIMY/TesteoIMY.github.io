@@ -1,0 +1,433 @@
+---
+import Layout from '../layouts/Layout.astro';
+import initialArticles from '../data/articulos.json';
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<Layout 
+  title="Panel de Administración Visual | Revista Literaria Anfibias" 
+  description="Panel de administración maqueta para la creación y gestión de artículos en localStorage."
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- Header del Panel Admin -->
+    <div class="border-b border-sage-200 pb-6 mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 bg-forest-800 text-white rounded text-xs font-mono font-semibold uppercase tracking-wider mb-2">
+          <span>Demostración Visual</span>
+          <span>·</span>
+          <span>Sin Backend</span>
+        </div>
+        <h1 class="font-serif text-3xl font-bold text-forest-900">
+          Panel de Redacción & Gestión Editorial
+        </h1>
+        <p class="text-xs text-ink-600 font-sans mt-0.5">
+          Publica artículos dinámicos persistidos en el almacenamiento local de tu navegador (`localStorage`).
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a 
+          href={baseUrl}
+          class="text-xs font-semibold text-forest-900 hover:text-forest-700 border border-sage-300 bg-white hover:bg-sage-100 px-3.5 py-2 rounded transition-colors inline-flex items-center gap-1"
+        >
+          <span>← Volver a Portada</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Simulación de Protección Visual -->
+    <div id="auth-lock-card" class="bg-forest-900 text-white rounded-xl p-8 shadow-md mb-8 border border-forest-800">
+      <div class="max-w-xl space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-forest-800 flex justify-center items-center shrink-0 text-xl">
+            🦎
+          </div>
+          <div>
+            <h2 class="font-serif text-xl font-bold text-white">Acceso al Panel Editorial (Simulado)</h2>
+            <p class="text-xs text-sage-200">Ingresa la clave de redactor/a o haz clic en ingresar.</p>
+          </div>
+        </div>
+
+        <form id="auth-form" class="flex gap-3 pt-2">
+          <input 
+            type="password" 
+            id="passcode-input"
+            placeholder="Clave (Ej: anfibias2025)"
+            value="anfibias2025"
+            class="bg-forest-950 border border-forest-700 text-white text-xs rounded px-3 py-2 focus:outline-none focus:border-sage-400 flex-grow font-mono"
+          />
+          <button 
+            type="submit" 
+            class="bg-white hover:bg-sage-100 text-forest-900 text-xs font-semibold px-4 py-2 rounded transition-colors"
+          >
+            Ingresar al Panel
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Contenido del Panel Protegido -->
+    <div id="admin-dashboard-content" class="hidden space-y-12">
+      
+      <!-- Banner de Estado -->
+      <div class="bg-sage-200 border border-sage-300 text-forest-900 rounded-lg p-4 text-xs flex justify-between items-center font-sans">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-forest-700"></span>
+          <span><strong>Sesión activa:</strong> Equipo Redacción Anfibias (Modo Demostración Local)</span>
+        </div>
+        <button id="logout-btn" type="button" class="underline text-forest-900 hover:text-black font-medium">
+          Cerrar Sesión Visual
+        </button>
+      </div>
+
+      <!-- Formulario para Añadir Nuevo Artículo -->
+      <section class="bg-white border border-sage-200 rounded-xl p-6 sm:p-8 shadow-2xs">
+        <div class="border-b border-sage-200 pb-4 mb-6">
+          <h2 class="font-serif text-2xl font-bold text-forest-900">
+            Redactar y Publicar Nuevo Artículo
+          </h2>
+          <p class="text-xs text-ink-600 font-sans mt-0.5">
+            Completa los campos para inyectar un texto en tiempo real al sitio.
+          </p>
+        </div>
+
+        <form id="new-article-form" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Título -->
+            <div class="md:col-span-2 space-y-1">
+              <label for="titulo" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
+                Título del Artículo *
+              </label>
+              <input 
+                type="text" 
+                id="titulo" 
+                name="titulo" 
+                required 
+                placeholder="Ej: Escrituras de la vulnerabilidad en la poesía contemporánea"
+                class="w-full bg-sage-50 border border-sage-300 rounded px-3 py-2 text-sm text-ink-900 focus:bg-white focus:outline-none focus:ring-1 focus:ring-forest-800 font-serif"
+              />
+            </div>
+
+            <!-- Subtítulo -->
+            <div class="md:col-span-2 space-y-1">
+              <label for="subtitulo" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
+                Subtítulo o Bajada (Opcional)
+              </label>
+              <input 
+                type="text" 
+                id="subtitulo" 
+                name="subtitulo" 
+                placeholder="Ej: Apuntes sobre la resistencia somática y el deseo"
+                class="w-full bg-sage-50 border border-sage-300 rounded px-3 py-2 text-sm text-ink-900 focus:bg-white focus:outline-none focus:ring-1 focus:ring-forest-800 font-serif italic"
+              />
+            </div>
+
+            <!-- Autor/a -->
+            <div class="space-y-1">
+              <label for="autor" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
+                Autor/a o Colectivo *
+              </label>
+              <input 
+                type="text" 
+                id="autor" 
+                name="autor" 
+                required 
+                placeholder="Ej: Francisca M. Sepúlveda"
+                class="w-full bg-sage-50 border border-sage-300 rounded px-3 py-2 text-sm text-ink-900 focus:bg-white focus:outline-none focus:ring-1 focus:ring-forest-800 font-sans"
+              />
+            </div>
+
+            <!-- Categoría -->
+            <div class="space-y-1">
+              <label for="categoria" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
+                Sección Editorial *
+              </label>
+              <select 
+                id="categoria" 
+                name="categoria" 
+                required 
+                class="w-full bg-sage-50 border border-sage-300 rounded px-3 py-2 text-sm text-ink-900 focus:bg-white focus:outline-none focus:ring-1 focus:ring-forest-800 font-sans"
+              >
+                <option value="Ensayos">Ensayos</option>
+                <option value="Reseñas">Reseñas</option>
+                <option value="Artículos">Artículos</option>
+                <option value="Escrituras anfibias">Escrituras anfibias: híbridos</option>
+              </select>
+            </div>
+
+            <!-- Biografía del autor -->
+            <div class="md:col-span-2 space-y-1">
+              <label for="biografiaAutor" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
+                Breve Biografía del Autor/a
+              </label>
+              <input 
+                type="text" 
+                id="biografiaAutor" 
+                name="biografiaAutor" 
+                placeholder="Ej: Poeta e investigadora independiente chilena."
+                class="w-full bg-sage-50 border border-sage-300 rounded px-3 py-2 text-xs text-ink-900 focus:bg-white focus:outline-none focus:ring-1 focus:ring-forest-800 font-sans"
+              />
+            </div>
+
+            <!-- Resumen -->
+            <div class="md:col-span-2 space-y-1">
+              <label for="resumen" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
+                Resumen / Extracto para Portada *
+              </label>
+              <textarea 
+                id="resumen" 
+                name="resumen" 
+                rows="3" 
+                required 
+                placeholder="Escribe un breve resumen de 2-3 líneas..."
+                class="w-full bg-sage-50 border border-sage-300 rounded px-3 py-2 text-sm text-ink-900 focus:bg-white focus:outline-none focus:ring-1 focus:ring-forest-800 font-sans"
+              ></textarea>
+            </div>
+
+            <!-- Contenido completo -->
+            <div class="md:col-span-2 space-y-1">
+              <div class="flex justify-between items-center mb-1">
+                <label for="contenido" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
+                  Contenido Completo (HTML / Párrafos) *
+                </label>
+                <div class="space-x-1 text-[11px] font-mono">
+                  <button type="button" class="insert-tag text-forest-800 hover:text-black underline" data-tag="p">Párrafo &lt;p&gt;</button>
+                  <button type="button" class="insert-tag text-forest-800 hover:text-black underline" data-tag="blockquote">Cita &lt;blockquote&gt;</button>
+                  <button type="button" class="insert-tag text-forest-800 hover:text-black underline" data-tag="strong">Negrita &lt;strong&gt;</button>
+                </div>
+              </div>
+              <textarea 
+                id="contenido" 
+                name="contenido" 
+                rows="7" 
+                required 
+                placeholder="<p class='drop-cap'>Escribe el cuerpo del texto aquí...</p>"
+                class="w-full bg-sage-50 border border-sage-300 rounded p-3 text-xs text-ink-900 font-mono focus:bg-white focus:outline-none focus:ring-1 focus:ring-forest-800"
+              ></textarea>
+            </div>
+
+            <!-- Enlace al PDF -->
+            <div class="space-y-1">
+              <label for="pdfUrl" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
+                Enlace al PDF
+              </label>
+              <input 
+                type="text" 
+                id="pdfUrl" 
+                name="pdfUrl" 
+                value="#"
+                placeholder="Ej: /pdf/mi-articulo.pdf"
+                class="w-full bg-sage-50 border border-sage-300 rounded px-3 py-2 text-xs text-ink-900 font-mono"
+              />
+            </div>
+
+            <!-- Minutos de lectura -->
+            <div class="space-y-1">
+              <label for="lecturaMinutos" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
+                Tiempo Estimado (Minutos)
+              </label>
+              <input 
+                type="number" 
+                id="lecturaMinutos" 
+                name="lecturaMinutos" 
+                value="5"
+                min="1"
+                class="w-full bg-sage-50 border border-sage-300 rounded px-3 py-2 text-xs text-ink-900 font-mono"
+              />
+            </div>
+
+          </div>
+
+          <div class="pt-4 border-t border-sage-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="text-xs text-ink-600">
+              * El artículo se guardará en `localStorage` y aparecerá inmediatamente en la Portada `/`.
+            </p>
+            <button 
+              type="submit" 
+              class="w-full sm:w-auto bg-forest-800 hover:bg-forest-900 text-white font-semibold px-6 py-2.5 rounded text-sm transition-colors shadow-2xs"
+            >
+              Publicar Artículo en Demo
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Lista de Artículos Creados -->
+      <section class="bg-white border border-sage-200 rounded-xl p-6 sm:p-8 shadow-2xs space-y-6">
+        <div class="border-b border-sage-200 pb-4 flex justify-between items-center">
+          <div>
+            <h2 class="font-serif text-xl font-bold text-forest-900">
+              Artículos Creados en este Navegador (`localStorage`)
+            </h2>
+            <p class="text-xs text-ink-600 font-sans mt-0.5">
+              Administra o elimina los artículos añadidos localmente.
+            </p>
+          </div>
+          <button 
+            id="reset-storage-btn" 
+            type="button" 
+            class="text-xs font-semibold text-rose-700 hover:text-rose-900 border border-rose-200 bg-rose-50 hover:bg-rose-100 px-3 py-1.5 rounded transition-colors"
+          >
+            Restablecer Datos Iniciales
+          </button>
+        </div>
+
+        <div id="local-articles-list" class="space-y-3">
+          <!-- Cargado vía JS -->
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+  import { saveArticle, resetArticles } from '../utils/articlesManager.js';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const authCard = document.getElementById('auth-lock-card');
+    const dashboard = document.getElementById('admin-dashboard-content');
+    const authForm = document.getElementById('auth-form');
+    const logoutBtn = document.getElementById('logout-btn');
+    const newForm = document.getElementById('new-article-form');
+    const localList = document.getElementById('local-articles-list');
+    const resetBtn = document.getElementById('reset-storage-btn');
+    const tagBtns = document.querySelectorAll('.insert-tag');
+
+    if (authForm) {
+      authForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (authCard && dashboard) {
+          authCard.classList.add('hidden');
+          dashboard.classList.remove('hidden');
+          loadLocalArticlesList();
+        }
+      });
+    }
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        if (authCard && dashboard) {
+          authCard.classList.remove('hidden');
+          dashboard.classList.add('hidden');
+        }
+      });
+    }
+
+    tagBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tag = btn.getAttribute('data-tag');
+        const textarea = document.getElementById('contenido') as HTMLTextAreaElement;
+        if (!textarea) return;
+
+        let snippet = '';
+        if (tag === 'p') snippet = '<p>Tu texto aquí...</p>';
+        if (tag === 'blockquote') snippet = '<blockquote>«Tu cita textual aquí»</blockquote>';
+        if (tag === 'strong') snippet = '<strong>Texto destacado</strong>';
+
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const text = textarea.value;
+        textarea.value = text.substring(0, start) + snippet + text.substring(end);
+        textarea.focus();
+      });
+    });
+
+    if (newForm) {
+      newForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(newForm as HTMLFormElement);
+        
+        const nuevo = {
+          titulo: formData.get('titulo') as string,
+          subtitulo: formData.get('subtitulo') as string,
+          autor: formData.get('autor') as string,
+          categoria: formData.get('categoria') as string,
+          biografiaAutor: formData.get('biografiaAutor') as string,
+          resumen: formData.get('resumen') as string,
+          contenido: formData.get('contenido') as string,
+          pdfUrl: formData.get('pdfUrl') as string || '#',
+          lecturaMinutos: parseInt(formData.get('lecturaMinutos') as string) || 5,
+        };
+
+        const success = saveArticle(nuevo);
+        if (success) {
+          alert(`¡Artículo "${nuevo.titulo}" publicado con éxito!\n\nSe ha guardado en localStorage y ya se muestra en la portada de la revista.`);
+          (newForm as HTMLFormElement).reset();
+          loadLocalArticlesList();
+        } else {
+          alert('Hubo un error guardando el artículo en el navegador.');
+        }
+      });
+    }
+
+    function loadLocalArticlesList() {
+      if (!localList) return;
+      try {
+        const raw = localStorage.getItem('anfibias_articulos_custom');
+        if (!raw) {
+          localList.innerHTML = `
+            <div class="p-4 bg-sage-50 text-ink-600 text-xs italic rounded text-center">
+              No has añadido artículos personalizados aún. Los 4 artículos oficiales de articulos.json están activos.
+            </div>
+          `;
+          return;
+        }
+
+        const items = JSON.parse(raw);
+        if (!Array.isArray(items) || items.length === 0) {
+          localList.innerHTML = `
+            <div class="p-4 bg-sage-50 text-ink-600 text-xs italic rounded text-center">
+              No hay artículos personalizados en localStorage.
+            </div>
+          `;
+          return;
+        }
+
+        localList.innerHTML = items.map((art: any, index: number) => `
+          <div class="flex items-center justify-between p-3 bg-sage-50 border border-sage-200 rounded text-xs font-sans">
+            <div>
+              <span class="font-semibold text-forest-900">${art.titulo}</span>
+              <span class="text-ink-600"> (${art.categoria}) — Por ${art.autor}</span>
+              <span class="block text-[11px] text-ink-500">Publicado: ${art.fecha}</span>
+            </div>
+            <button 
+              type="button" 
+              class="delete-single-btn text-rose-700 hover:text-rose-900 font-semibold px-2 py-1 bg-white border border-rose-200 rounded"
+              data-index="${index}"
+            >
+              Eliminar
+            </button>
+          </div>
+        `).join('');
+
+        document.querySelectorAll('.delete-single-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const idx = parseInt(btn.getAttribute('data-index') || '0');
+            const items = JSON.parse(localStorage.getItem('anfibias_articulos_custom') || '[]');
+            items.splice(idx, 1);
+            localStorage.setItem('anfibias_articulos_custom', JSON.stringify(items));
+            loadLocalArticlesList();
+          });
+        });
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (confirm('¿Deseas borrar los artículos personalizados y restaurar los datos por defecto?')) {
+          resetArticles();
+          loadLocalArticlesList();
+          alert('Almacenamiento local restablecido.');
+        }
+      });
+    }
+  });
+</script>

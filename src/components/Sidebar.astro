@@ -1,0 +1,89 @@
+---
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<aside class="space-y-8 font-sans">
+  
+  <!-- Bloque 1: Presentación Oficial -->
+  <div class="bg-sage-100 border border-sage-200 rounded-xl p-6 shadow-2xs">
+    <div class="flex items-center gap-2 mb-2">
+      <span class="text-xl">🦎</span>
+      <h3 class="font-serif text-lg font-bold text-forest-900">
+        Sobre la Revista
+      </h3>
+    </div>
+    <p class="text-xs text-ink-800 leading-relaxed mb-4">
+      <em>Revista Literaria Anfibias</em> es una revista chilena que posee un espacio de lectura y escritura desde la diversidad: voces femeninas, feministas, queer y críticas. Su propósito es abrir un lugar de encuentro para la literatura, el pensamiento crítico y la experimentación narrativa.
+    </p>
+    <a 
+      href={`${baseUrl}acerca-de`}
+      class="text-xs uppercase tracking-wider font-semibold text-forest-800 hover:text-forest-950 underline inline-flex items-center gap-1"
+    >
+      Conocer Más & Manifiesto →
+    </a>
+  </div>
+
+  <!-- Bloque 2: Equipo Editorial Real -->
+  <div class="bg-white border border-sage-200 rounded-xl p-6 shadow-2xs">
+    <h3 class="font-serif text-lg font-bold text-forest-900 mb-3 border-b border-sage-200 pb-2">
+      Equipo Editorial
+    </h3>
+    <ul class="space-y-4 text-xs text-ink-800">
+      <li class="flex flex-col">
+        <strong class="font-semibold text-forest-900 text-sm">Alexandra Novoa Romero</strong>
+        <span class="text-forest-700 font-medium">Fundadora & Directora General</span>
+        <span class="text-[11px] text-ink-600 mt-0.5">Dra. (c) en Literatura Latinoamericana</span>
+      </li>
+      <li class="flex flex-col">
+        <strong class="font-semibold text-forest-900 text-sm">Jana Aravena Riquelme</strong>
+        <span class="text-forest-700 font-medium">Coordinación Editorial</span>
+        <span class="text-[11px] text-ink-600 mt-0.5">Dra. (c) en Historia & Profesora de Filosofía</span>
+      </li>
+      <li class="flex flex-col">
+        <strong class="font-semibold text-forest-900 text-sm">Pamela Valdés Peña</strong>
+        <span class="text-forest-700 font-medium">Coordinación Editorial</span>
+        <span class="text-[11px] text-ink-600 mt-0.5">Dra. (c) en Literatura Latinoamericana</span>
+      </li>
+    </ul>
+    <div class="mt-4 pt-3 border-t border-sage-200 text-right">
+      <a href={`${baseUrl}acerca-de#equipo`} class="text-xs text-forest-800 hover:text-forest-950 underline">
+        Ver detalles del equipo →
+      </a>
+    </div>
+  </div>
+
+  <!-- Bloque 3: Normas de Envío Rápidas -->
+  <div class="bg-sage-50 border border-sage-200 rounded-xl p-6">
+    <h3 class="text-xs uppercase tracking-widest font-bold text-forest-900 mb-3">
+      Directrices de Envío
+    </h3>
+    <ul class="space-y-2 text-xs text-ink-800">
+      <li class="flex items-center gap-1.5">
+        <span class="text-forest-700">✓</span> Manuscritos originales e inéditos.
+      </li>
+      <li class="flex items-center gap-1.5">
+        <span class="text-forest-700">✓</span> Formato Word (Arial/Times 12pt, 1.5).
+      </li>
+      <li class="flex items-center gap-1.5">
+        <span class="text-forest-700">✓</span> Citación según normas <strong>APA 7.ª ed</strong>.
+      </li>
+    </ul>
+  </div>
+
+  <!-- Bloque 4: Envíos de trabajos -->
+  <div class="bg-white border border-sage-200 rounded-xl p-6 shadow-2xs">
+    <h3 class="font-serif text-lg font-bold text-forest-900 mb-2 border-b border-sage-200 pb-2">
+      Envíos de Trabajos
+    </h3>
+    <p class="text-xs text-ink-700 mb-3">
+      Envía tu propuesta o manuscrito directamente a la casilla oficial de la revista:
+    </p>
+    <a 
+      href="mailto:revistaliterariaanfibias@gmail.com" 
+      class="block text-xs font-mono bg-sage-100 hover:bg-sage-200 text-forest-900 p-2.5 rounded text-center font-semibold transition-colors mb-3 break-all border border-sage-300"
+    >
+      revistaliterariaanfibias@gmail.com
+    </a>
+  </div>
+
+</aside>

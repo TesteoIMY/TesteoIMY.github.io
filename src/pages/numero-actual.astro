@@ -1,0 +1,180 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ArticleModal from '../components/ArticleModal.astro';
+import initialArticles from '../data/articulos.json';
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<Layout 
+  title="Número Actual | Revista Literaria Anfibias (Vol. 1, N° 1)" 
+  description="Maquetación e índice de artículos del Volumen 1, Número 1 de Revista Literaria Anfibias."
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- Módulo de Cabecera del Volumen -->
+    <div class="bg-paper border-2 border-forest-800/30 rounded-2xl p-8 sm:p-12 shadow-md mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        
+        <!-- Portada gráfica simulada del volumen -->
+        <div class="md:col-span-4 flex justify-center">
+          <div class="w-64 h-88 bg-forest-900 text-white rounded-2xl shadow-xl p-6 flex flex-col justify-between border-4 border-forest-800 relative group overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-forest-800/40 to-forest-950 pointer-events-none"></div>
+            
+            <div class="relative z-10">
+              <span class="text-[10px] uppercase tracking-widest font-sans font-bold text-pistachio-200 block mb-1">Revista Literaria</span>
+              <div class="flex items-center gap-1">
+                <span class="text-2xl">🦎</span>
+                <h2 class="font-script text-4xl font-bold tracking-tight text-white leading-none">Anfibias</h2>
+              </div>
+              <span class="text-[11px] font-sans italic text-pistachio-200 block border-b border-forest-700 pb-2 mt-1 font-medium">Palabras en movimiento</span>
+            </div>
+
+            <div class="relative z-10 my-4 text-center">
+              <span class="text-xs uppercase font-mono tracking-widest text-pistachio-200 font-bold">VOLUMEN 1, N° 1</span>
+              <p class="font-script text-xl text-white mt-1 leading-snug font-bold">«Lectura y escritura desde la diversidad»</p>
+            </div>
+
+            <div class="relative z-10 pt-2 border-t border-forest-700 flex justify-between items-end text-[10px] font-sans text-pistachio-200 font-bold">
+              <span>Chile · 2024/2025</span>
+              <span>Open Access</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ficha técnica del volumen -->
+        <div class="md:col-span-8 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-forest-800 text-white rounded-full text-xs font-sans font-bold shadow-xs">
+            <span>Edición Inaugural</span>
+            <span>·</span>
+            <span>Volumen 1, N° 1</span>
+          </div>
+
+          <h1 class="font-script text-4xl sm:text-5xl font-bold text-forest-900 leading-tight">
+            Volumen 1, Número 1: Corporalidades y Escrituras Disidentes
+          </h1>
+
+          <p class="font-sans text-ink-900 text-sm sm:text-base leading-relaxed font-medium">
+            Reúne los primeros ensayos críticos, escrituras anfibias e intervenciones poéticas que abren el camino de la revista en Chile. Voces femeninas, feministas y queer que interrogan la norma y la forma.
+          </p>
+
+          <div class="pt-4 border-t border-forest-800/20 flex flex-wrap gap-4 text-xs font-sans text-ink-900 font-medium">
+            <div><strong class="text-forest-900">Directora:</strong> Alexandra Novoa Romero</div>
+            <div><strong class="text-forest-900">Coordinación:</strong> Jana Aravena Riquelme & Pamela Valdés Peña</div>
+            <div><strong class="text-forest-900">Formato:</strong> Word / PDF Digital Libre</div>
+          </div>
+
+          <div class="pt-2 flex flex-wrap gap-3">
+            <button 
+              id="download-full-volume-btn"
+              type="button" 
+              class="bg-forest-800 hover:bg-forest-900 text-white text-xs font-bold px-5 py-2.5 rounded-full transition-colors inline-flex items-center gap-2 shadow-md"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              <span>Descargar Edición Compilada (PDF)</span>
+            </button>
+            
+            <a 
+              href={`${baseUrl}convocatorias`} 
+              class="bg-white hover:bg-pistachio-100 text-forest-900 text-xs font-bold px-5 py-2.5 rounded-full border-2 border-forest-800 transition-colors inline-flex items-center gap-2 shadow-xs"
+            >
+              <span>Ver convocatoria activa Vol. 1 N° 1</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Índice de Artículos -->
+    <section class="space-y-6">
+      <div class="border-b-2 border-forest-800/20 pb-3 flex justify-between items-end">
+        <div>
+          <h2 class="font-script text-3xl font-bold text-forest-900">
+            Sumario de la Edición
+          </h2>
+          <p class="text-xs text-ink-700 font-sans mt-0.5 font-medium">
+            Textos seleccionados para lectura en web o descarga en PDF.
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        {initialArticles.map((articulo, idx) => (
+          <div class="bg-paper border-2 border-forest-800/30 rounded-2xl p-6 hover:border-forest-800 transition-all flex flex-col md:flex-row justify-between md:items-center gap-6 group shadow-xs">
+            
+            <div class="flex items-start gap-4 max-w-3xl">
+              <span class="font-mono text-lg font-bold text-forest-900 group-hover:scale-110 transition-transform shrink-0">
+                0{idx + 1}
+              </span>
+
+              <div class="space-y-1">
+                <div class="flex items-center gap-2 text-xs text-ink-700 font-medium">
+                  <span class="uppercase tracking-wider font-bold text-forest-900">{articulo.categoria}</span>
+                  <span>·</span>
+                  <span>{articulo.fecha}</span>
+                </div>
+
+                <h3 class="font-script text-2xl font-bold text-forest-900 group-hover:text-forest-700">
+                  <button 
+                    type="button" 
+                    class="open-article-btn text-left hover:underline" 
+                    data-article={JSON.stringify(articulo)}
+                  >
+                    {articulo.titulo}
+                  </button>
+                </h3>
+
+                {articulo.subtitulo && (
+                  <p class="font-script text-lg text-forest-800 font-semibold">
+                    «{articulo.subtitulo}»
+                  </p>
+                )}
+
+                <p class="text-xs font-sans text-ink-900 pt-1 font-medium">
+                  Por <strong class="text-forest-900 font-bold">{articulo.autor}</strong>
+                </p>
+              </div>
+            </div>
+
+            <!-- Botones de lectura y PDF -->
+            <div class="flex items-center gap-3 shrink-0 self-end md:self-center">
+              <button
+                type="button"
+                class="open-article-btn text-xs font-bold bg-white border border-forest-800/30 hover:bg-pistachio-200 text-forest-900 px-4 py-2 rounded-full transition-colors"
+                data-article={JSON.stringify(articulo)}
+              >
+                Leer en Web
+              </button>
+
+              <button
+                type="button"
+                class="download-pdf-btn text-xs font-bold bg-forest-800 hover:bg-forest-900 text-white px-4 py-2 rounded-full transition-colors inline-flex items-center gap-1.5 shadow-xs"
+                data-title={articulo.titulo}
+                data-autor={articulo.autor}
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <span>Descargar PDF</span>
+              </button>
+            </div>
+
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div>
+
+  <ArticleModal />
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fullVolBtn = document.getElementById('download-full-volume-btn');
+    if (fullVolBtn) {
+      fullVolBtn.addEventListener('click', () => {
+        alert('Generando PDF del Volumen 1, Número 1.\n\n(Simulación de descarga estática para GitHub Pages)');
+      });
+    }
+  });
+</script>

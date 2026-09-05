@@ -1,0 +1,47 @@
+---
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<section class="my-10 bg-pistachio-100 border border-pistachio-300 text-forest-900 rounded-xl p-6 sm:p-8 relative overflow-hidden shadow-2xs">
+  <div class="absolute -top-10 -right-10 w-48 h-48 bg-pistachio-200/60 rounded-full blur-xl pointer-events-none"></div>
+  
+  <div class="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+    <div class="space-y-3 max-w-3xl">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="bg-forest-800 text-white text-xs uppercase tracking-widest font-semibold px-2.5 py-0.5 rounded flex items-center gap-1">
+          <span>🦎 Convocatoria Abierta</span>
+        </span>
+        <span class="text-xs text-forest-900 font-sans font-medium">
+          Fecha límite: <strong class="text-forest-950 underline">02 de Mayo de 2026</strong>
+        </span>
+      </div>
+
+      <h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-forest-900 leading-snug">
+        Convocatoria abierta — Volumen 1, Número 1
+      </h2>
+
+      <p class="text-sm text-ink-800 leading-relaxed font-sans">
+        Invitamos a autorxs a enviar textos que exploren corporalidades femeninas, feministas y queer, así como experiencias de disidencia, enfermedad, precariedad y resistencia, desde perspectivas críticas, narrativas y experimentales.
+      </p>
+
+      <p class="text-xs text-forest-800 font-serif italic border-l-2 border-forest-800 pl-3 py-0.5">
+        «Buscamos escrituras que interroguen el cuerpo, la identidad, el deseo y la vulnerabilidad, tensionando los marcos normativos desde lo literario y lo político.»
+      </p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto shrink-0">
+      <a 
+        href={`${baseUrl}convocatorias`}
+        class="inline-flex justify-center items-center px-5 py-2.5 text-sm font-medium rounded text-white bg-forest-800 hover:bg-forest-900 transition-colors shadow-2xs text-center"
+      >
+        Consultar Bases Completas
+      </a>
+      <a 
+        href="mailto:revistaliterariaanfibias@gmail.com?subject=Envio%20Manuscrito%20Vol%201%20Num%201"
+        class="inline-flex justify-center items-center px-5 py-2.5 border border-forest-800 text-sm font-medium rounded text-forest-900 bg-paper hover:bg-pistachio-200 transition-colors text-center"
+      >
+        Enviar por Correo (.doc)
+      </a>
+    </div>
+  </div>
+</section>
