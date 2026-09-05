@@ -3,9 +3,9 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  // Configuración oficial para GitHub Pages
+  // Configuración oficial para repositorio principal TesteoIMY.github.io
   site: 'https://TesteoIMY.github.io',
-  base: '/revista-anfibias/',
+  base: '/',
   integrations: [
     tailwind({
       applyBaseStyles: true,
