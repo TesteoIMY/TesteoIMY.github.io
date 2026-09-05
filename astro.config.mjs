@@ -3,10 +3,9 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  // Placeholder para despliegue estático en GitHub Pages
-  // Reemplazar 'https://usuario.github.io' y '/nombre-repositorio/' según tu configuración final
-  site: 'https://usuario.github.io',
-  base: '/',
+  // Configuración oficial para GitHub Pages
+  site: 'https://TesteoIMY.github.io',
+  base: '/revista-anfibias/',
   integrations: [
     tailwind({
       applyBaseStyles: true,
