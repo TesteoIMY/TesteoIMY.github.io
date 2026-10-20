@@ -6,13 +6,29 @@ const navItems = [
   { name: 'Inicio', path: baseUrl },
   { name: 'Número Actual', path: `${baseUrl}numero-actual` },
   { name: 'Convocatorias', path: `${baseUrl}convocatorias` },
-  { name: 'Acerca de', path: `${baseUrl}acerca-de` },
-  { name: 'Directrices para Autores', path: `${baseUrl}convocatorias#directrices` },
+  { 
+    name: 'Acerca de', 
+    path: `${baseUrl}sobre-la-revista`,
+    isDropdown: true,
+    subItems: [
+      { name: 'Sobre la revista', path: `${baseUrl}sobre-la-revista` },
+      { name: 'Equipo editorial', path: `${baseUrl}equipo-editorial` },
+      { name: 'Contacto', path: `${baseUrl}contacto` }
+    ]
+  },
+  { name: 'Directrices para Autores', path: `${baseUrl}directrices-para-autores` },
 ];
 
-function isActive(path: string) {
-  if (path === baseUrl && currentPath === baseUrl) return true;
-  if (path !== baseUrl && currentPath.includes(path.replace(baseUrl, ''))) return true;
+function isActive(item: any) {
+  if (item.path === baseUrl && currentPath === baseUrl) return true;
+  if (item.isDropdown && item.subItems) {
+    return item.subItems.some((sub: any) => {
+      const subSlug = sub.path.replace(baseUrl, '').replace(/^\//, '');
+      return currentPath.includes(subSlug);
+    });
+  }
+  const itemSlug = item.path.replace(baseUrl, '').replace(/^\//, '');
+  if (itemSlug && currentPath.includes(itemSlug)) return true;
   return false;
 }
 ---
@@ -68,18 +84,68 @@ function isActive(path: string) {
       <div class="flex items-center justify-between h-12">
         <!-- Enlaces escritorio -->
         <div class="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
-            <a
-              href={item.path}
-              class={`text-sm font-medium tracking-wide transition-colors py-3 border-b-2 ${
-                isActive(item.path)
-                  ? 'border-forest-900 text-forest-900 font-semibold'
-                  : 'border-transparent text-ink-800 hover:text-forest-900 hover:border-pistachio-400'
-              }`}
-            >
-              {item.name}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            if (item.isDropdown) {
+              return (
+                <div class="relative dropdown-parent group" id="desktop-acerca-container">
+                  <button
+                    id="acerca-de-btn"
+                    type="button"
+                    aria-expanded="false"
+                    class={`text-sm font-medium tracking-wide transition-colors py-3 border-b-2 flex items-center gap-1.5 focus:outline-none cursor-pointer ${
+                      isActive(item)
+                        ? 'border-forest-900 text-forest-900 font-semibold'
+                        : 'border-transparent text-ink-800 hover:text-forest-900 hover:border-pistachio-400'
+                    }`}
+                  >
+                    <span>{item.name}</span>
+                    <svg id="acerca-chevron" class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </button>
+
+                  <!-- Menú Desplegable (Hover & Click) hacia páginas separadas -->
+                  <div
+                    id="acerca-de-menu"
+                    class="dropdown-popover absolute left-0 top-full pt-1 z-50 w-56 hidden"
+                  >
+                    <div class="bg-white border border-pistachio-300 rounded-xl shadow-xl py-2 px-1 text-sm font-sans divide-y divide-pistachio-100">
+                      <div class="py-1">
+                        {item.subItems.map((sub) => {
+                          const isSubActive = currentPath.includes(sub.path.replace(baseUrl, '').replace(/^\//, ''));
+                          return (
+                            <a
+                              href={sub.path}
+                              class={`block px-3 py-2 rounded-lg font-medium transition-colors ${
+                                isSubActive
+                                  ? 'bg-pistachio-100 text-forest-900 font-semibold'
+                                  : 'text-ink-800 hover:bg-pistachio-50 hover:text-forest-900'
+                              }`}
+                            >
+                              {sub.name}
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <a
+                href={item.path}
+                class={`text-sm font-medium tracking-wide transition-colors py-3 border-b-2 ${
+                  isActive(item)
+                    ? 'border-forest-900 text-forest-900 font-semibold'
+                    : 'border-transparent text-ink-800 hover:text-forest-900 hover:border-pistachio-400'
+                }`}
+              >
+                {item.name}
+              </a>
+            );
+          })}
         </div>
 
         <!-- Acceso rápido -->
@@ -111,18 +177,51 @@ function isActive(path: string) {
       <!-- Menú desplegable móvil -->
       <div id="mobile-menu" class="hidden md:hidden pb-4 pt-2 border-t border-pistachio-300">
         <div class="flex flex-col space-y-2">
-          {navItems.map((item) => (
-            <a
-              href={item.path}
-              class={`px-3 py-2 text-sm font-medium rounded ${
-                isActive(item.path)
-                  ? 'bg-pistachio-200 text-forest-900 font-semibold'
-                  : 'text-ink-800 hover:bg-pistachio-100 hover:text-forest-900'
-              }`}
-            >
-              {item.name}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            if (item.isDropdown) {
+              return (
+                <div class="space-y-1">
+                  <button
+                    id="mobile-acerca-toggle"
+                    type="button"
+                    class={`w-full text-left px-3 py-2 text-sm font-medium rounded flex justify-between items-center ${
+                      isActive(item)
+                        ? 'bg-pistachio-200 text-forest-900 font-semibold'
+                        : 'text-ink-800 hover:bg-pistachio-100 hover:text-forest-900'
+                    }`}
+                  >
+                    <span>{item.name}</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </button>
+                  <div id="mobile-acerca-sub" class="hidden pl-4 py-1 space-y-1 bg-pistachio-50/50 rounded-lg">
+                    {item.subItems.map((sub) => (
+                      <a
+                        href={sub.path}
+                        class="block px-3 py-1.5 text-xs font-medium text-ink-700 hover:text-forest-900"
+                      >
+                        • {sub.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <a
+                href={item.path}
+                class={`px-3 py-2 text-sm font-medium rounded ${
+                  isActive(item)
+                    ? 'bg-pistachio-200 text-forest-900 font-semibold'
+                    : 'text-ink-800 hover:bg-pistachio-100 hover:text-forest-900'
+                }`}
+              >
+                {item.name}
+              </a>
+            );
+          })}
           <a
             href={`${baseUrl}convocatorias`}
             class="mt-2 text-center text-xs uppercase tracking-wider font-semibold bg-forest-800 text-white py-2 rounded"
@@ -135,12 +234,51 @@ function isActive(path: string) {
   </nav>
 </header>
 
+<style>
+  /* Menú desplegable en escritorio: visible en hover o al hacer clic */
+  #desktop-acerca-container:hover #acerca-de-menu,
+  #desktop-acerca-container.is-open #acerca-de-menu {
+    display: block !important;
+  }
+  #desktop-acerca-container:hover #acerca-chevron,
+  #desktop-acerca-container.is-open #acerca-chevron {
+    transform: rotate(180deg);
+  }
+</style>
+
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  if (btn && menu) {
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
+  // Control interactivo del menú móvil
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (mobileBtn && mobileMenu) {
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+  // Toggle de submenú móvil Acerca de
+  const mobileAcercaToggle = document.getElementById('mobile-acerca-toggle');
+  const mobileAcercaSub = document.getElementById('mobile-acerca-sub');
+  if (mobileAcercaToggle && mobileAcercaSub) {
+    mobileAcercaToggle.addEventListener('click', () => {
+      mobileAcercaSub.classList.toggle('hidden');
+    });
+  }
+
+  // Toggle por clic en escritorio para Acerca de
+  const acercaContainer = document.getElementById('desktop-acerca-container');
+  const acercaBtn = document.getElementById('acerca-de-btn');
+  if (acercaContainer && acercaBtn) {
+    acercaBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      acercaContainer.classList.toggle('is-open');
+    });
+
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!acercaContainer.contains(target)) {
+        acercaContainer.classList.remove('is-open');
+      }
     });
   }
 </script>

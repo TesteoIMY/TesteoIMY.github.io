@@ -1,130 +1,125 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <Layout 
-  title="Convocatorias & Directrices para Autores | Revista Literaria Anfibias" 
-  description="Convocatoria abierta para el Volumen 1, Número 1. Directrices de envío, normas APA 7.ª edición y secciones oficiales."
+  title="Convocatorias | Revista Literaria Anfibias" 
+  description="Convocatoria abierta para el Volumen 1, Número 1 de Revista Literaria Anfibias. Fechas límites y ejes temáticos."
 >
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     
     <!-- Cabecera de Convocatoria -->
-    <header class="border-b-2 border-forest-800/20 pb-8 mb-10">
-      <div class="inline-flex items-center gap-2 bg-forest-800 text-white text-xs font-sans font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-xs">
+    <header class="border-b border-pistachio-300 pb-8 mb-10">
+      <div class="inline-flex items-center gap-2 bg-forest-800 text-white text-xs font-sans font-semibold uppercase tracking-widest px-3 py-1 rounded mb-3 shadow-2xs">
         <span>🦎 Convocatoria Abierta — Volumen 1, Número 1</span>
       </div>
-      <h1 class="font-script text-4xl sm:text-6xl font-bold text-forest-900 leading-tight mb-4">
+      <h1 class="font-serif text-3xl sm:text-5xl font-bold text-forest-900 leading-tight mb-4">
         Convocatoria para Colaboraciones y Manuscritos
       </h1>
-      <p class="font-sans text-ink-900 text-base sm:text-lg leading-relaxed max-w-3xl font-medium">
+      <p class="font-sans text-ink-800 text-base sm:text-lg leading-relaxed max-w-3xl font-light">
         Invitamos a autorxs a enviar textos que exploren corporalidades femeninas, feministas y queer, así como experiencias de disidencia, enfermedad, precariedad y resistencia, desde perspectivas críticas, narrativas y experimentales.
       </p>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a 
+          href={`${baseUrl}directrices-para-autores`}
+          class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider bg-forest-800 hover:bg-forest-900 text-white px-4 py-2 rounded transition-colors shadow-2xs"
+        >
+          <span>Ver Directrices para Autores →</span>
+        </a>
+      </div>
     </header>
 
     <!-- Calendario de Recepción -->
-    <section class="mb-12 bg-paper border-2 border-forest-800/30 rounded-2xl p-6 sm:p-8 shadow-md">
-      <h2 class="font-script text-3xl font-bold text-forest-900 mb-6 flex items-center gap-2">
-        <svg class="w-6 h-6 text-forest-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+    <section class="mb-12 bg-pistachio-100 border border-pistachio-300 rounded-xl p-6 sm:p-8 shadow-2xs">
+      <h2 class="font-serif text-xl font-bold text-forest-900 mb-6 flex items-center gap-2">
+        <svg class="w-5 h-5 text-forest-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
         <span>Fecha Límite de Recepción (Volumen 1, N° 1)</span>
       </h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="bg-white p-5 rounded-xl border border-forest-800/20 shadow-xs">
-          <span class="text-xs uppercase tracking-wider text-forest-900 font-bold block mb-1">Fecha Límite de Envíos</span>
-          <strong class="font-script text-3xl text-forest-900 block">02 de Mayo de 2026</strong>
-          <span class="text-xs text-ink-700 font-medium">Recepción por correo electrónico</span>
+        <div class="bg-white p-5 rounded-lg border border-pistachio-200 shadow-2xs">
+          <span class="text-xs uppercase tracking-wider text-forest-800 font-semibold block mb-1">Fecha Límite de Envíos</span>
+          <strong class="font-serif text-2xl text-forest-900 block">02 de Mayo de 2026</strong>
+          <span class="text-xs text-ink-600">Recepción por correo electrónico</span>
         </div>
 
-        <div class="bg-white p-5 rounded-xl border border-forest-800/20 shadow-xs">
-          <span class="text-xs uppercase tracking-wider text-forest-900 font-bold block mb-1">Evaluación Editorial</span>
-          <strong class="font-script text-3xl text-forest-900 block">Mayo - Junio 2026</strong>
-          <span class="text-xs text-ink-700 font-medium">Dictaminación por pares ciegos</span>
+        <div class="bg-white p-5 rounded-lg border border-pistachio-200 shadow-2xs">
+          <span class="text-xs uppercase tracking-wider text-forest-800 font-semibold block mb-1">Evaluación Editorial</span>
+          <strong class="font-serif text-2xl text-forest-900 block">Mayo - Junio 2026</strong>
+          <span class="text-xs text-ink-600">Dictaminación por pares ciegos</span>
         </div>
 
-        <div class="bg-white p-5 rounded-xl border border-forest-800/20 shadow-xs">
-          <span class="text-xs uppercase tracking-wider text-forest-900 font-bold block mb-1">Correo de Recepción</span>
-          <strong class="font-mono text-xs text-forest-900 block mt-1 underline break-all font-bold">revistaliterariaanfibias@gmail.com</strong>
-          <span class="text-xs text-ink-700 font-medium">Formato Word (.doc / .docx)</span>
+        <div class="bg-white p-5 rounded-lg border border-pistachio-200 shadow-2xs">
+          <span class="text-xs uppercase tracking-wider text-forest-800 font-semibold block mb-1">Correo de Recepción</span>
+          <strong class="font-mono text-xs text-forest-900 block mt-1 underline break-all">revistaliterariaanfibias@gmail.com</strong>
+          <span class="text-xs text-ink-600">Formato Word (.doc / .docx)</span>
         </div>
       </div>
     </section>
 
     <!-- Secciones de la Revista -->
     <section class="mb-14 space-y-6">
-      <h2 class="font-script text-3xl font-bold text-forest-900 border-b-2 border-forest-800/20 pb-3">
-        1. Secciones de la Revista
+      <h2 class="font-serif text-2xl font-bold text-forest-900 border-b border-pistachio-300 pb-3">
+        Secciones de la Revista para esta Convocatoria
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
         
-        <div class="bg-paper border-2 border-forest-800/30 rounded-2xl p-6 shadow-xs">
-          <span class="inline-block bg-forest-800 text-white font-script text-xl font-bold px-3 py-0.5 rounded-full mb-2">Ensayos</span>
+        <div class="bg-white border border-pistachio-300 rounded-xl p-6 shadow-2xs">
+          <span class="inline-block bg-pistachio-100 text-forest-900 text-xs font-semibold px-2.5 py-0.5 rounded mb-2 uppercase tracking-wider border border-pistachio-200">Ensayos</span>
           <h3 class="font-serif text-lg font-bold text-forest-900 mb-2">Reflexiones Críticas & Teoría</h3>
-          <p class="text-xs text-ink-900 leading-relaxed mb-3 font-medium">
+          <p class="text-xs text-ink-700 leading-relaxed mb-3">
             Espacio para reflexiones críticas, análisis teóricos y exploraciones conceptuales sobre literatura, género, disidencias y cultura.
           </p>
-          <span class="text-xs font-bold text-forest-800 font-mono">Extensión: Hasta 2.000 palabras</span>
+          <span class="text-xs font-semibold text-forest-800 font-mono">Extensión: Hasta 2.000 palabras</span>
         </div>
 
-        <div class="bg-paper border-2 border-forest-800/30 rounded-2xl p-6 shadow-xs">
-          <span class="inline-block bg-forest-800 text-white font-script text-xl font-bold px-3 py-0.5 rounded-full mb-2">Reseñas</span>
+        <div class="bg-white border border-pistachio-300 rounded-xl p-6 shadow-2xs">
+          <span class="inline-block bg-pistachio-100 text-forest-900 text-xs font-semibold px-2.5 py-0.5 rounded mb-2 uppercase tracking-wider border border-pistachio-200">Reseñas</span>
           <h3 class="font-serif text-lg font-bold text-forest-900 mb-2">Comentarios Literarios</h3>
-          <p class="text-xs text-ink-900 leading-relaxed mb-3 font-medium">
-            Lecturas y comentarios sobre obras literarias recientes, destacando miradas feministas, queer y críticas. <em>(Se solicita adjuntar imagen de la portada del libro)</em>.
+          <p class="text-xs text-ink-700 leading-relaxed mb-3">
+            Lecturas y comentarios sobre obras literarias recientes, destacando miradas feministas, queer y críticas. <em>(Adjuntar imagen de portada del libro)</em>.
           </p>
-          <span class="text-xs font-bold text-forest-800 font-mono">Extensión: 1.000 – 1.500 palabras</span>
+          <span class="text-xs font-semibold text-forest-800 font-mono">Extensión: 1.000 – 1.500 palabras</span>
         </div>
 
-        <div class="bg-paper border-2 border-forest-800/30 rounded-2xl p-6 shadow-xs">
-          <span class="inline-block bg-forest-800 text-white font-script text-xl font-bold px-3 py-0.5 rounded-full mb-2">Artículos</span>
+        <div class="bg-white border border-pistachio-300 rounded-xl p-6 shadow-2xs">
+          <span class="inline-block bg-pistachio-100 text-forest-900 text-xs font-semibold px-2.5 py-0.5 rounded mb-2 uppercase tracking-wider border border-pistachio-200">Artículos</span>
           <h3 class="font-serif text-lg font-bold text-forest-900 mb-2">Textos Narrativos & Crónicas</h3>
-          <p class="text-xs text-ink-900 leading-relaxed mb-3 font-medium">
+          <p class="text-xs text-ink-700 leading-relaxed mb-3">
             Textos narrativos, crónicas, relatos breves y otras escrituras creativas que amplían los márgenes de lo literario.
           </p>
-          <span class="text-xs font-bold text-forest-800 font-mono">Extensión: Hasta 3.000 palabras</span>
+          <span class="text-xs font-semibold text-forest-800 font-mono">Extensión: Hasta 3.000 palabras</span>
         </div>
 
-        <div class="bg-paper border-2 border-forest-800/30 rounded-2xl p-6 shadow-xs">
-          <span class="inline-block bg-forest-800 text-white font-script text-xl font-bold px-3 py-0.5 rounded-full mb-2">Escrituras Anfibias</span>
+        <div class="bg-white border border-pistachio-300 rounded-xl p-6 shadow-2xs">
+          <span class="inline-block bg-pistachio-100 text-forest-900 text-xs font-semibold px-2.5 py-0.5 rounded mb-2 uppercase tracking-wider border border-pistachio-200">Escrituras Anfibias</span>
           <h3 class="font-serif text-lg font-bold text-forest-900 mb-2">Híbridos & Exploraciones Textuales</h3>
-          <p class="text-xs text-ink-900 leading-relaxed mb-3 font-medium">
+          <p class="text-xs text-ink-700 leading-relaxed mb-3">
             Textos que habitan los cruces entre géneros y formas literarias. Escrituras híbridas y experimentales que entienden el lenguaje como un espacio de exploración estética, política y sensible.
           </p>
-          <span class="text-xs font-bold text-forest-800 font-mono">Extensión libre / experimental</span>
+          <span class="text-xs font-semibold text-forest-800 font-mono">Extensión: Libre / experimental</span>
         </div>
 
-      </div>
-    </section>
-
-    <!-- Directrices para Autores -->
-    <section id="directrices" class="mb-14 space-y-6 scroll-mt-24">
-      <h2 class="font-script text-3xl font-bold text-forest-900 border-b-2 border-forest-800/20 pb-3">
-        2. Directrices para Autores/as & Normas de Citación
-      </h2>
-
-      <div class="bg-paper border-2 border-forest-800/30 rounded-2xl p-6 sm:p-8 space-y-4 text-sm leading-relaxed font-sans text-ink-900 shadow-xs font-medium">
-        <ul class="list-disc pl-5 space-y-3">
-          <li><strong>Originalidad e ineditismo:</strong> El artículo debe ser estrictamente original. El envío no ha sido publicado previamente en otros medios impresos o digitales.</li>
-          <li><strong>Formato del archivo:</strong> El texto debe ser enviado exclusivamente en formato Word (<code>.doc</code> o <code>.docx</code>).</li>
-          <li><strong>Tipografía e interlineado:</strong> El texto debe tener interlineado <strong>1.5</strong>, tamaño de fuente <strong>12</strong>, y tipografía <strong>Arial</strong> o <strong>Times New Roman</strong>.</li>
-          <li><strong>Normas de citación y referencias:</strong> Todas las citas y referencias bibliográficas deberán ajustarse rigurosamente a las normas <strong>APA, 7.ª edición</strong> (American Psychological Association).</li>
-        </ul>
       </div>
     </section>
 
     <!-- Caja de Envío -->
-    <section class="bg-forest-900 text-white rounded-2xl p-8 sm:p-10 border-2 border-forest-800 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6 shadow-lg">
+    <section class="bg-forest-900 text-white rounded-xl p-8 sm:p-10 border border-forest-800 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6 shadow-sm">
       <div class="space-y-2 max-w-2xl">
-        <h2 class="font-script text-3xl font-bold text-white">¿Deseas postular tu manuscrito?</h2>
-        <p class="text-sm text-pistachio-200 font-medium">
-          Envía tu archivo Word junto con tus datos de autoría directamente a nuestra casilla oficial.
+        <h2 class="font-serif text-2xl font-bold text-white">¿Deseas postular tu manuscrito?</h2>
+        <p class="text-sm text-pistachio-200">
+          Revisa las directrices de formato y envía tu archivo Word junto con tus datos de autoría a nuestra casilla oficial.
         </p>
       </div>
 
       <div class="shrink-0 space-y-2 text-center">
         <a 
           href="mailto:revistaliterariaanfibias@gmail.com?subject=Envio%20Manuscrito%20Vol%201%20Num%201"
-          class="inline-block bg-white hover:bg-pistachio-100 text-forest-900 font-bold px-6 py-3 rounded-full text-sm transition-colors shadow-md font-mono"
+          class="inline-block bg-white hover:bg-pistachio-100 text-forest-900 font-semibold px-6 py-3 rounded text-sm transition-colors shadow-2xs font-mono"
         >
           revistaliterariaanfibias@gmail.com
         </a>

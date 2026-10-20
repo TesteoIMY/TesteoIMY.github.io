@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AboutNavTabs from '../components/AboutNavTabs.astro';
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<Layout 
+  title="Contacto | Revista Literaria Anfibias" 
+  description="Canales de contacto y comunicación directa con el equipo editorial de Revista Literaria Anfibias."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 font-sans">
+    
+    <!-- Pestañas de Navegación de la Sección Acerca de -->
+    <AboutNavTabs activeTab="contacto" />
+
+    <!-- Header de la sección -->
+    <header class="border-b border-pistachio-300 pb-8 mb-10">
+      <span class="text-xs font-mono uppercase tracking-widest text-forest-800 font-semibold block mb-2">Comunicación Oficial</span>
+      <h1 class="font-serif text-3xl sm:text-5xl font-bold text-forest-900 leading-tight mb-4">
+        Contacto
+      </h1>
+      <p class="font-serif italic text-lg text-forest-800">
+        «Canales de comunicación directa para consultas editoriales, recepción de manuscritos e intercambio académico.»
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      
+      <!-- Tarjeta 1: Correo Oficial -->
+      <div class="bg-white border border-pistachio-300 rounded-xl p-6 sm:p-8 shadow-2xs space-y-4 flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-pistachio-100 flex items-center justify-center text-forest-800 mb-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          </div>
+          <h2 class="font-serif text-2xl font-bold text-forest-900 mb-2">Correo Oficial</h2>
+          <p class="text-sm text-ink-700 leading-relaxed font-light mb-4">
+            Para dudas sobre el proceso editorial, propuestas fuera de convocatoria o contacto institucional con la dirección de la revista:
+          </p>
+        </div>
+
+        <div>
+          <a 
+            href="mailto:revistaliterariaanfibias@gmail.com" 
+            class="block text-center font-mono text-sm bg-forest-800 hover:bg-forest-900 text-white font-semibold py-3 px-4 rounded-lg transition-colors shadow-2xs break-all"
+          >
+            revistaliterariaanfibias@gmail.com
+          </a>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2: Para Autores/as -->
+      <div class="bg-white border border-pistachio-300 rounded-xl p-6 sm:p-8 shadow-2xs space-y-4 flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-pistachio-100 flex items-center justify-center text-forest-800 mb-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+          <h2 class="font-serif text-2xl font-bold text-forest-900 mb-2">Envíos de Manuscritos</h2>
+          <p class="text-sm text-ink-700 leading-relaxed font-light mb-4">
+            Si deseas enviar un texto para dictaminación, asegúrate de revisar primero los requisitos formales (formato Word, extensión y normas APA 7.ª edición).
+          </p>
+        </div>
+
+        <div>
+          <a 
+            href={`${baseUrl}directrices-para-autores`} 
+            class="block text-center text-sm font-semibold text-forest-900 bg-pistachio-100 hover:bg-pistachio-200 border border-pistachio-300 py-3 px-4 rounded-lg transition-colors shadow-2xs"
+          >
+            Ver Directrices para Autores →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Información adicional -->
+    <div class="bg-pistachio-50 border border-pistachio-200 rounded-xl p-6 text-xs text-ink-700 space-y-2 mb-10">
+      <p><strong>Ubicación editorial:</strong> Santiago, Chile.</p>
+      <p><strong>Periodicidad:</strong> Publicación periódica semestral en acceso abierto.</p>
+      <p><strong>Tiempo estimado de respuesta:</strong> Los correos se responden en un plazo de 3 a 5 días hábiles.</p>
+    </div>
+
+    <!-- Enlaces de navegación rápida entre pestañas -->
+    <div class="border-t border-pistachio-300 pt-8 flex flex-wrap gap-4 justify-between items-center text-xs">
+      <a 
+        href={`${baseUrl}sobre-la-revista`}
+        class="inline-flex items-center gap-1.5 font-semibold text-forest-900 hover:text-forest-700 bg-white border border-pistachio-300 px-4 py-2.5 rounded-lg shadow-2xs transition-colors"
+      >
+        <span>← Volver a Sobre la Revista</span>
+      </a>
+      <a 
+        href={`${baseUrl}equipo-editorial`}
+        class="inline-flex items-center gap-1.5 font-semibold text-forest-900 hover:text-forest-700 bg-white border border-pistachio-300 px-4 py-2.5 rounded-lg shadow-2xs transition-colors"
+      >
+        <span>← Volver a Equipo Editorial</span>
+      </a>
+    </div>
+
+  </div>
+</Layout>

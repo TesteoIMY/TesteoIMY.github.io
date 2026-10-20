@@ -1,0 +1,41 @@
+---
+interface Props {
+  activeTab: 'sobre-la-revista' | 'equipo-editorial' | 'contacto';
+}
+
+const { activeTab } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+
+const tabs = [
+  { id: 'sobre-la-revista', name: 'Sobre la Revista', href: `${baseUrl}sobre-la-revista` },
+  { id: 'equipo-editorial', name: 'Equipo Editorial', href: `${baseUrl}equipo-editorial` },
+  { id: 'contacto', name: 'Contacto', href: `${baseUrl}contacto` },
+];
+---
+
+<!-- Barra de pestañas secundarias para Acerca de -->
+<div class="border-b border-pistachio-300 mb-10 pb-0">
+  <div class="flex items-center justify-between flex-wrap gap-2">
+    <nav class="flex space-x-2 sm:space-x-8 -mb-px overflow-x-auto" aria-label="Pestañas de sección">
+      {tabs.map((tab) => {
+        const isCurrent = tab.id === activeTab;
+        return (
+          <a
+            href={tab.href}
+            class={`py-3 px-2 sm:px-3 text-sm sm:text-base font-serif transition-all border-b-2 whitespace-nowrap flex items-center gap-2 ${
+              isCurrent
+                ? 'border-forest-800 text-forest-900 font-bold bg-pistachio-100/50 rounded-t-lg'
+                : 'border-transparent text-ink-700 hover:text-forest-900 hover:border-pistachio-300'
+            }`}
+            aria-current={isCurrent ? 'page' : undefined}
+          >
+            <span>{tab.name}</span>
+          </a>
+        );
+      })}
+    </nav>
+    <span class="text-[11px] font-mono uppercase tracking-wider text-forest-700 hidden sm:inline pb-2">
+      Revista Literaria Anfibias
+    </span>
+  </div>
+</div>

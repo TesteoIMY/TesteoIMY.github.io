@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<Layout 
+  title="Directrices para Autores | Revista Literaria Anfibias" 
+  description="Normas de estilo, formato de envío Word, requisitos de extensión y citación bajo normas APA 7.ª edición para publicar en Revista Literaria Anfibias."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 font-sans">
+    
+    <!-- Header de la sección -->
+    <header class="border-b border-pistachio-300 pb-8 mb-10">
+      <div class="inline-flex items-center gap-2 bg-forest-800 text-white text-xs font-sans font-semibold uppercase tracking-widest px-3 py-1 rounded mb-3 shadow-2xs">
+        <span>Guía Editorial Oficial</span>
+      </div>
+      <h1 class="font-serif text-3xl sm:text-5xl font-bold text-forest-900 leading-tight mb-4">
+        Directrices para Autores/as
+      </h1>
+      <p class="font-serif italic text-base sm:text-lg text-forest-800">
+        «Requisitos y normas técnicas para la recepción y evaluación de colaboraciones en Revista Literaria Anfibias.»
+      </p>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="space-y-12">
+      
+      <!-- 1. Requisitos Generales de Envío -->
+      <section class="bg-white border border-pistachio-300 rounded-xl p-6 sm:p-8 shadow-2xs space-y-4">
+        <h2 class="font-serif text-2xl font-bold text-forest-900 border-b border-pistachio-200 pb-3 flex items-center gap-2">
+          <span>1. Directrices Generales de Envío</span>
+        </h2>
+        <ul class="space-y-3 text-sm text-ink-800 leading-relaxed list-disc pl-5">
+          <li><strong>Originalidad:</strong> El artículo debe ser estrictamente original.</li>
+          <li><strong>Ineditismo:</strong> El envío no ha sido publicado previamente en ningún otro medio digital o impreso.</li>
+          <li><strong>Formato de archivo:</strong> El texto debe ser enviado exclusivamente en formato <strong>Word (.doc o .docx)</strong>.</li>
+          <li><strong>Tipografía y formato:</strong> El texto debe tener interlineado <strong>1.5</strong>, tamaño de fuente <strong>12</strong>, y el tipo de letra debe ser <strong>Arial</strong> o <strong>Times New Roman</strong>.</li>
+        </ul>
+      </section>
+
+      <!-- 2. Normas de Citación y Referencias -->
+      <section class="bg-white border border-pistachio-300 rounded-xl p-6 sm:p-8 shadow-2xs space-y-4">
+        <h2 class="font-serif text-2xl font-bold text-forest-900 border-b border-pistachio-200 pb-3">
+          2. Normas de Citación y Referencias
+        </h2>
+        <p class="text-sm text-ink-800 leading-relaxed">
+          Todas las citas dentro del cuerpo del texto y las referencias bibliográficas finales deberán ajustarse rigurosamente a las normas <strong>APA, 7.ª edición</strong> (<em>American Psychological Association</em>).
+        </p>
+        <div class="bg-pistachio-50 border border-pistachio-200 rounded-lg p-4 text-xs text-forest-900 space-y-1 font-mono">
+          <p>• Citas textuales mayores a 40 palabras en bloque independiente con sangría.</p>
+          <p>• Referencias bibliográficas al final ordenadas alfabéticamente.</p>
+        </div>
+      </section>
+
+      <!-- 3. Secciones y Extensiones -->
+      <section class="bg-white border border-pistachio-300 rounded-xl p-6 sm:p-8 shadow-2xs space-y-4">
+        <h2 class="font-serif text-2xl font-bold text-forest-900 border-b border-pistachio-200 pb-3">
+          3. Secciones de la Revista y Límites de Extensión
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="p-4 bg-pistachio-50 rounded-lg border border-pistachio-200">
+            <span class="inline-block bg-forest-800 text-white text-[11px] font-semibold px-2 py-0.5 rounded mb-2 uppercase tracking-wider">Ensayos</span>
+            <p class="text-xs text-ink-800 leading-relaxed">
+              Reflexiones críticas, análisis teóricos y exploraciones conceptuales sobre literatura, género, disidencias y cultura.
+            </p>
+            <p class="text-xs font-semibold text-forest-900 mt-2 font-mono">Extensión: Hasta 2.000 palabras</p>
+          </div>
+
+          <div class="p-4 bg-pistachio-50 rounded-lg border border-pistachio-200">
+            <span class="inline-block bg-forest-800 text-white text-[11px] font-semibold px-2 py-0.5 rounded mb-2 uppercase tracking-wider">Reseñas</span>
+            <p class="text-xs text-ink-800 leading-relaxed">
+              Lecturas y comentarios sobre obras literarias recientes, destacando miradas feministas, queer y críticas. <em>(Agregar imagen del libro)</em>.
+            </p>
+            <p class="text-xs font-semibold text-forest-900 mt-2 font-mono">Extensión: 1.000 – 1.500 palabras</p>
+          </div>
+
+          <div class="p-4 bg-pistachio-50 rounded-lg border border-pistachio-200">
+            <span class="inline-block bg-forest-800 text-white text-[11px] font-semibold px-2 py-0.5 rounded mb-2 uppercase tracking-wider">Artículos</span>
+            <p class="text-xs text-ink-800 leading-relaxed">
+              Textos narrativos, crónicas, relatos breves y otras escrituras creativas que amplían los márgenes de lo literario.
+            </p>
+            <p class="text-xs font-semibold text-forest-900 mt-2 font-mono">Extensión: Hasta 3.000 palabras</p>
+          </div>
+
+          <div class="p-4 bg-pistachio-50 rounded-lg border border-pistachio-200">
+            <span class="inline-block bg-forest-800 text-white text-[11px] font-semibold px-2 py-0.5 rounded mb-2 uppercase tracking-wider">Escrituras Anfibias</span>
+            <p class="text-xs text-ink-800 leading-relaxed">
+              Textos que habitan los cruces entre géneros y formas literarias. Escrituras híbridas y experimentales.
+            </p>
+            <p class="text-xs font-semibold text-forest-900 mt-2 font-mono">Extensión: Libre / experimental</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Envíos de Trabajos -->
+      <section class="bg-forest-900 text-white rounded-xl p-8 sm:p-10 border border-forest-800 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6 shadow-sm">
+        <div class="space-y-2 max-w-xl">
+          <h2 class="font-serif text-2xl font-bold text-white">Envíos de Trabajos</h2>
+          <p class="text-sm text-pistachio-200">
+            Una vez ajustado tu manuscrito según estas directrices, envíalo a nuestra casilla de correo oficial.
+          </p>
+        </div>
+
+        <div class="shrink-0 space-y-2 text-center">
+          <a 
+            href="mailto:revistaliterariaanfibias@gmail.com?subject=Envio%20Manuscrito%20-%20Revista%20Literaria%20Anfibias"
+            class="inline-block bg-white hover:bg-pistachio-100 text-forest-900 font-semibold px-6 py-3 rounded text-sm transition-colors shadow-2xs font-mono"
+          >
+            revistaliterariaanfibias@gmail.com
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+</Layout>

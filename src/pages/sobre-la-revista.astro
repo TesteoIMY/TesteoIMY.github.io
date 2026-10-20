@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AboutNavTabs from '../components/AboutNavTabs.astro';
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<Layout 
+  title="Sobre la Revista | Revista Literaria Anfibias" 
+  description="Conoce el manifiesto, línea editorial y propósito de Revista Literaria Anfibias: voces femeninas, feministas, queer y críticas en Chile."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 font-sans">
+    
+    <!-- Pestañas de Navegación de la Sección Acerca de -->
+    <AboutNavTabs activeTab="sobre-la-revista" />
+
+    <!-- Header de la sección -->
+    <header class="border-b border-pistachio-300 pb-8 mb-10">
+      <span class="text-xs font-mono uppercase tracking-widest text-forest-800 font-semibold block mb-2">Manifiesto Editorial</span>
+      <h1 class="font-serif text-3xl sm:text-5xl font-bold text-forest-900 leading-tight mb-4">
+        Sobre la Revista
+      </h1>
+      <p class="font-serif italic text-lg text-forest-800">
+        «Voces femeninas, feministas, queer y críticas. Nuestro propósito es abrir un lugar de encuentro para la literatura, el pensamiento crítico y la experimentación narrativa.»
+      </p>
+    </header>
+
+    <!-- Manifiesto & Propósito -->
+    <article class="prose prose-neutral max-w-none text-ink-800 leading-relaxed space-y-6 mb-14 font-light">
+      
+      <div class="bg-pistachio-100 border-l-4 border-forest-800 p-6 rounded-r-xl shadow-2xs font-serif text-lg leading-relaxed text-forest-900 font-normal">
+        "Revista Literaria Anfibias es una revista chilena que posee un espacio de lectura y escritura desde la diversidad: voces femeninas, feministas, queer y críticas. Su propósito es abrir un lugar de encuentro para la literatura, el pensamiento crítico y la experimentación narrativa."
+      </div>
+
+      <h2 class="font-serif text-2xl font-bold text-forest-900 pt-4">Línea Editorial & Apertura a la Diversidad</h2>
+      <p>
+        Buscamos escrituras que interroguen el cuerpo, la identidad, el deseo y la vulnerabilidad, tensionando los marcos normativos tanto desde lo estrictamente literario como desde lo político.
+      </p>
+      <p>
+        Acogemos reflexiones críticas, análisis teóricos, reseñas comentadas de libros, crónicas, relatos breves e híbridos textuales que entiendan el lenguaje como un territorio vital de exploración estética y política.
+      </p>
+
+      <h2 class="font-serif text-2xl font-bold text-forest-900 pt-4">Acceso Abierto y Difusión Cultural</h2>
+      <p>
+        Publicamos de forma estática en abierto, garantizando la libre circulación de las ideas sin barreras de acceso. Todas las contribuciones aceptadas son difundidas y archivadas para la comunidad lectora e investigadora en Chile y América Latina.
+      </p>
+    </article>
+
+    <!-- Enlaces de navegación rápida entre pestañas -->
+    <div class="border-t border-pistachio-300 pt-8 flex flex-wrap gap-4 justify-between items-center text-xs">
+      <a 
+        href={`${baseUrl}equipo-editorial`}
+        class="inline-flex items-center gap-1.5 font-semibold text-forest-900 hover:text-forest-700 bg-white border border-pistachio-300 px-4 py-2.5 rounded-lg shadow-2xs transition-colors"
+      >
+        <span>Pestaña Siguiente: Conocer al Equipo Editorial →</span>
+      </a>
+      <a 
+        href={`${baseUrl}contacto`}
+        class="inline-flex items-center gap-1.5 font-semibold text-white bg-forest-800 hover:bg-forest-900 px-4 py-2.5 rounded-lg shadow-2xs transition-colors"
+      >
+        <span>Ir a Contacto</span>
+      </a>
+    </div>
+
+  </div>
+</Layout>
